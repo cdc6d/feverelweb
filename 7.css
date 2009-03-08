@@ -1,0 +1,232 @@
+.shown  { display: block }
+.hidden { display: none  }
+
+/* The navigation bar */
+
+#nav {
+}
+#nav p  { margin: 0.5ex 0; }
+#nav p.heading { text-align: center; margin-bottom: 1ex; }
+#nav div.border {
+  border: solid thin;
+  padding: 1ex;
+}
+
+#nav #copyChoice { }
+#nav #copyChoice p { text-align: right; }
+#nav #baseEdition { }
+#nav #selectBaseEdition { }
+
+#startupMessage {
+  font-size: larger;
+  text-align: center;
+  color: red;
+}
+
+/* The the main content area */
+
+#center {
+}
+
+#textScrollView {
+  width: 5.5in;
+  background-color: gray;
+  overflow: auto;
+}
+#bottom {
+  background-color: silver;
+  text-align: center;
+}
+
+/* Styles for the books! */
+
+.bookPage {
+  margin: 1mm;
+  padding: 0.25in 0.5in;
+  background-color: #ffd;
+}
+
+.bookPage .pageHeader {
+  white-space: pre;     /* Awful but powerful. */
+  margin-bottom: 1.5em;
+}
+.bookPage .chapterHeading {
+  font-size: large;
+  text-align: center;
+  text-transform: uppercase;
+}
+.bookPage .chapterSubhead {
+  text-align: center;
+}
+.bookPage .pageMain {
+  white-space: pre;
+  /* white-space: pre-wrap; /* My Mozilla doesn't support this. */
+  text-align: justify;
+  position: relative;   /* Context for absolutely positioned descendants. */
+}
+.bookPage .pageFooter {
+  white-space: pre;     /* Awful but powerful. */
+  text-align: center;
+}
+.bookPage .small-caps {
+  font-variant: small-caps;
+}
+
+/* AC1896 */
+#edition0 .bookPage {
+  height: 5.95in;
+}
+#edition0 .pageMain {
+  line-height: 12pt;
+  font-size: 10pt;
+  letter-spacing: 0.75pt;
+}
+#edition0 .pageHeader {
+  text-transform: uppercase;
+}
+#edition0 .chapterHeading {
+  font-size: medium;
+  margin-top: 4.2in;
+  margin-bottom: 10pt;
+}
+#edition0 .chapterSubhead {
+  font-size: large;
+  margin-top: 10pt;
+  margin-bottom: 10pt;
+}
+
+/* T1875 */
+#edition1 .bookPage {
+  height: 6.1in;
+}
+#edition1 .pageMain {
+  line-height: 12pt;
+  font-size: 10pt;
+  letter-spacing: 0.75pt;
+}
+#edition1 .pageHeader {
+  font-variant: small-caps;
+}
+#edition1 .chapterHeading {
+  font-size: small;
+  margin-top: 4.55in;
+  margin-bottom: 6pt;
+}
+#edition1 .chapterSubhead {
+  font-size: small;
+  margin-top: 6pt;
+  margin-bottom: 6pt;
+}
+
+/* CH1859 */
+#edition2 .bookPage {
+  height: 4.65in;
+  padding: 0.4in 0.7in;
+}
+#edition2 .pageMain {
+  line-height: 12pt;
+  font-size: 10pt;
+  letter-spacing: 0.75pt;
+}
+#edition2 .pageHeader {
+  font-variant: small-caps;
+}
+#edition2 .pageFooter {
+  text-align: center;
+}
+#edition2 .chapterHeading {
+  margin-top: 4.5em;
+  margin-bottom: 1em;
+}
+#edition2 .chapterSubhead {
+  margin-bottom: 1em;
+  text-transform: uppercase;
+  font-size: small;
+}
+
+/* The note anchors */
+
+.note.inactive { }  /* Inherit text & bg color, making it invisible. */
+.note.active.accidental  { color: green }
+.note.active.substantive { color: blue }
+.note.highlit { background-color: orange }
+.note.sticky  { background-color: orange; outline: solid thin }
+
+img.deletion {
+  position: absolute;
+  left: -0.22in;
+}
+img.deletion.inactive { display: none }
+
+.note.deletionBar {
+  position: absolute;
+  left: -0.18in;
+  width: 4px;
+  top: 0;
+  bottom: 0;
+}
+.note.deletionBar.inactive { }  /* Inherit bg color, making it invisible. */
+.note.deletionBar.active   { background-color: #77f; }
+.note.deletionBar.highlit  { background-color: #33f; }
+.note.deletionBar.sticky   { background-color: #33f; outline: solid thin }
+
+/* Stuff that appears in the #notes DIV */
+
+#notes {
+  min-width: 4in;
+}
+
+#notes .note {
+  max-width: 3in;
+  float: left;
+  margin: 1px;
+  padding: 2px;
+  border: solid medium;
+}
+#notes .note.shown  { }
+#notes .note.hidden { display: none }
+
+#notes .note.hover { border-color: red }
+#notes .note.nohover { border-color: orange }
+
+#notes .note.accidental {
+  background-color: #bfb;
+}
+#notes .note.substantive {
+  background-color: #9ff;
+}
+#notes .note.accidental:before {
+  display: block;
+  font-size: small;
+  font-weight: bold;
+  content: "Accidental"
+}
+#notes .note.substantive:before {
+  display: block;
+  font-size: small;
+  font-weight: bold;
+  content: "Substantive"
+}
+
+#notes .note.addition { color: green; }
+#notes .note.deletion { color: red; }
+
+#notes .note .category    { font-style: italic }
+#notes .note .category em { font-style: normal }
+
+#notes .note .comment        { font-style: italic }
+#notes .note .comment em     { font-style: normal }
+#notes .note .comment:before { font-style: normal; content: "[" }
+#notes .note .comment:after  { font-style: normal; content: "]" }
+
+/* A scrolling area for script debug output */
+
+#debug {
+  display: none;
+  overflow: auto;
+  max-height: 5in;
+}
+
+/*
+vim:ts=2:shiftwidth=2:expandtab:tw=74
+*/

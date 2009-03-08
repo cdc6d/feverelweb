@@ -1,0 +1,5 @@
+.gridLayout     { display: table; table-layout: fixed }
+.gridRow        { display: table-row }
+.gridRow.shown  { display: table-row }
+.gridRow.hidden { display: none }
+.gridCell       { display: table-cell; vertical-align: top; }

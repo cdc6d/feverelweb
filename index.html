@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+
+  <title>The Ordeal of Richard Feverel &mdash; Prototype #6</title>
+
+  <link rel="stylesheet" type="text/css" href="gridLayout.css">
+
+  <style type="text/css">
+    #background {
+      position: absolute;
+      left: 0.65in;
+      width: 640px;
+      height: 580px;
+    }
+    #title {
+      position: absolute;
+      top: 1in;
+      border: solid medium;
+      border-color: #cd5;
+      padding: 1ex;
+      background-color: inherit;
+    }
+    #nav {
+      position: absolute;
+      left: 2.5in;
+      top: 2.5in;
+      border: solid medium;
+      border-color: #cd5;
+      padding: 0.5ex 0.3ex 0.2ex 0.5ex;
+      background-color: inherit;
+    }
+    #nav .gridCell {
+      padding: 0.5ex;
+    }
+    #nav img {
+      height: 1in;
+    }
+    #nav p {
+      font-size: 8pt;
+      font-weight: bold;
+      margin: 0;
+    }
+    body {
+      background-color: white;
+      font-family: sans-serif;
+    }
+    h1 {
+      margin: 0 6pt;
+      font-style: italic;
+      text-align: right;
+      font-size: 32pt;
+      font-weight: normal;
+    }
+    h2 {
+      font-size: 16pt;
+      margin: 0 6pt 16pt 0;
+      text-align: right;
+      font-weight: normal;
+    }
+    a img {
+      border-style: none;
+    }
+    a img:hover {
+      outline: solid 3px;
+      outline-color: #cd5;
+    }
+  </style>
+</head>
+
+<!--========================================================================-->
+
+<body>
+
+  <div>
+    <img id="background"
+         src="index_files/droppedImage.jpg"
+         alt="Background: leaf">
+  </div>
+
+  <div id="title">
+    <h1>The Ordeal of Richard Feverel</h1>
+    <h2>A Web Archive of Documentary and Critical Editions</h2>
+  </div>
+
+  <div id="nav" class="gridLayout">
+  <div class="gridRow">
+
+    <div class="gridCell">
+      <a href="intro.html"><img
+           src="index_files/P4260068.jpg"
+           alt="Meredith's portrait"></a>
+      <p>Introduction
+    </div>
+
+    <div class="gridCell">
+      <a href="methods.html"><img
+           src="index_files/P3070001.jpg"
+           alt="Photo of a sleeping reader"></a>
+      <p>Procedures and Goals
+    </div>
+
+    <div class="gridCell">
+      <a href="7.html"><img
+           src="index_files/P4260025.png"
+           alt="A shelf of Feverel editions"></a>
+      <p>Texts
+    </div>
+
+  </div>  <!-- gridRow -->
+  </div>  <!-- #nav -->
+
+</body>
+</html>
+
+<!--
+vim:ts=2:shiftwidth=2:expandtab:tw=74:nowrap
+-->

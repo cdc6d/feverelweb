@@ -1,0 +1,17 @@
+#summary Main page for the !FeverelWeb project.
+
+= Introduction =
+
+http://feverelweb.googlecode.com/svn/trunk/index.html
+http://feverelweb.googlecode.com/svn/trunk/images/cut-d.png
+
+http://code.google.com/p/feverelweb/svn/browse/trunk/index.html
+http://code.google.com/p/feverelweb/svn/browse/trunk/images/cut-d.png
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages

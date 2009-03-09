@@ -1,12 +1,10 @@
-#summary Main page for the !FeverelWeb project.
+#summary Main page for the FeverelWeb project.
 
 = Introduction =
 
-http://feverelweb.googlecode.com/svn/trunk/index.html
-http://feverelweb.googlecode.com/svn/trunk/images/cut-d.png
+[http://feverelweb.googlecode.com/svn/trunk/index.html Current Site]
 
-http://code.google.com/p/feverelweb/svn/browse/trunk/index.html
-http://code.google.com/p/feverelweb/svn/browse/trunk/images/cut-d.png
+http://feverelweb.googlecode.com/svn/trunk/images/cut-d.png
 
 
 = Details =

@@ -4,8 +4,6 @@
 
 [http://feverelweb.googlecode.com/svn/trunk/index.html Current Site]
 
-http://feverelweb.googlecode.com/svn/trunk/images/cut-d.png
-
 
 = Details =
 

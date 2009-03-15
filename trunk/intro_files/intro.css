@@ -62,10 +62,11 @@ h3 {
 
 ul.Plain {
 	list-style-type: none;
-	padding-left: 0pt;
+	padding-left: 0.4in;
 }
 ul.Plain li {
 	margin-bottom: 12pt;
+	text-indent: -0.4in;
 }
 
 .FootnoteLink {

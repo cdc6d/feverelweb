@@ -60,6 +60,14 @@ h3 {
     font-size: 13pt;
 }
 
+ul.Plain {
+	list-style-type: none;
+	padding-left: 0pt;
+}
+ul.Plain li {
+	margin-bottom: 12pt;
+}
+
 .FootnoteLink {
     font-size: 8pt;
     vertical-align: super;

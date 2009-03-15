@@ -42,7 +42,7 @@
      determine the width.  Text that takes up more than
      one line has uniquely determined line breaks.  -->
 
-<!--
+<!-- Arbitrary numeric IDs for each revision:
 <p>CH1859</p> 2
 <p>T1875</p>  1
 <p>KP1878</p> 3
@@ -52,6 +52,24 @@
 <p>AC1896</p> 0
 <p>ML1950</p> 7
 -->
+
+<div class="border">
+  <p class="heading">Base&nbsp;text:
+  <p><select id="selectBaseEdition" onchange="baseEdition(this)">
+       <option value="2">CH1859</option>
+       <option value="1">T1875</option>
+  <!-- <option value="4">CH1885</option> -->
+       <option value="0">AC1896</option>
+     </select>
+  <p class="hidden" id="publicationInfoEdition2"
+   >1859,<br>Chapman<br>and&nbsp;Hall
+  <p class="hidden" id="publicationInfoEdition1"
+   >1875,<br>Tauchnitz
+  <p class="hidden" id="publicationInfoEdition4"
+   >1885,<br>Chapman<br>and&nbsp;Hall
+  <p class="hidden" id="publicationInfoEdition0"
+   >1896,<br>Archibald<br>Constable<br>&amp;&nbsp;Co.
+</div>
 
 <div id="copyChoice" class="border">
   <p class="heading">Show&nbsp;notes<br>for&nbsp;copies:
@@ -80,24 +98,6 @@
 <div class="border">
   <p class="heading">Sticky&nbsp;notes:<br>
   <input type="button" value="Clear all" onclick="setAllSticky(false)">
-</div>
-
-<div class="border">
-  <p class="heading">Base&nbsp;text:
-  <p><select id="selectBaseEdition" onchange="baseEdition(this)">
-       <option value="2">CH1859</option>
-       <option value="1">T1875</option>
-  <!-- <option value="4">CH1885</option> -->
-       <option value="0">AC1896</option>
-     </select>
-  <p class="hidden" id="publicationInfoEdition2"
-   >1859,<br>Chapman<br>and&nbsp;Hall
-  <p class="hidden" id="publicationInfoEdition1"
-   >1875,<br>Tauchnitz
-  <p class="hidden" id="publicationInfoEdition4"
-   >1885,<br>Chapman<br>and&nbsp;Hall
-  <p class="hidden" id="publicationInfoEdition0"
-   >1896,<br>Archibald<br>Constable<br>&amp;&nbsp;Co.
 </div>
 
 <div class="border">

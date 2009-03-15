@@ -58,6 +58,7 @@ h2 {
 }
 h3 {
     font-size: 13pt;
+	margin-top: 0.4in;
 }
 
 ul.Plain {
@@ -67,6 +68,10 @@ ul.Plain {
 ul.Plain li {
 	margin-bottom: 12pt;
 	text-indent: -0.4in;
+}
+
+.LongList li {
+	margin-top: 1em;
 }
 
 .FootnoteLink {

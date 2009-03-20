@@ -1,9 +1,7 @@
 //           Edition    0    1    2    3    4    5    6    7
-const kPageOffsets = [ 202, 220, 105, 999, 999, 999, 999, 999 ]
-const kPageWidths  = [ 530, 530, 530, 530, 530, 530, 530, 530 ]
+const kFirstPages = [ 202, 220, 105, 999, 999, 999, 999, 999 ]
+const kLastPages  = [ 215, 238, 132, 999, 999, 999, 999, 999 ]
 
-var   gPageWidthPx = 450
-var   gPageOffset = 1
 var   gNumEditions = 1
 
 // ----------- Dynamic Notes: Utility ----------- //
@@ -69,6 +67,12 @@ function forEachElement (list, func)  // Use JS 1.6's list.forEach() instead?
 function getEdCheckbox(n)
 	{ return document.getElementById ("checkEdition" + n) }
 
+function getBaseEditionNum()
+{
+	var e = document.getElementById ("selectBaseEdition")
+	return e.options[e.selectedIndex].value
+}
+
 function countCheckedEditions()
 {
 	var count = 0
@@ -80,7 +84,7 @@ function countCheckedEditions()
 function debug(s)
 {
 	var e = document.getElementById ("debugText")
-	var n = document.createTextNode (s)
+	var n = document.createTextNode (s + '\n')
 	e.appendChild (n)
 
 	// Scroll to bottom.
@@ -217,7 +221,7 @@ function clickPage(p,evt)
 			p.becameSticky = []
 		}
 	} catch (e) {
-		alert ("Problem in clickPage():" + e)
+		alert ("Problem in clickPage(): " + e)
 		e.alerted = true
 		throw e
 	}
@@ -273,7 +277,7 @@ function showNotes(ed)
 				deactivateLinks()
 		}
 	} catch (e) {
-		alert ("Problem in showNotes():" + e)
+		alert ("Problem in showNotes(): " + e)
 		e.alerted = true
 		throw e
 	}
@@ -337,16 +341,52 @@ function selectAllEditions(yn)
 // Whenever the selected edition changes:
 //   - The currently displayed edition should be hidden.
 //   - The selected edition should be shown.
+//   - If not calculated yet, the dimensions & offsets of the pages
+//     should be calculated.
 //   - The view should scroll to the page that was being viewed before
 //     the selection was changed.
 
-function baseEdition(e)  // e is a <select> element.
+function resetBaseEdition()
 {
 	function switchClass (id, rx, newName)
 		{ replaceInClassName ( document.getElementById(id), rx, newName ) }
 
+	function getElemDimPx (elem, dim)
+	{
+		var dec = window.getComputedStyle (elem, null)  // CSSStyleDeclaration
+		var val = dec.getPropertyCSSValue (dim)         // CSSValue
+
+		if ( val.cssValueType != CSSValue.CSS_PRIMITIVE_VALUE )
+			debug ( "CSS value '" + val.cssText + "' is not primitive.")
+
+		if ( val.primitiveType != CSSPrimitiveValue.CSS_PX )
+			debug ( "CSS value '" + val.cssText + "' is not in px.")
+
+		return val.getFloatValue ( CSSPrimitiveValue.CSS_PX )
+	}
+
+	function calcPagePositions (edId)
+	{
+		// The parent of the elements containing the pages.
+		var edRow = document.getElementById (edId)
+
+		if ( edRow.pagePositionsCalculated ) {
+			debug (edId + ": positions already calculated.")
+			return
+		}
+		edRow.pagePositionsCalculated = true
+
+		var lastPageX = 0
+		forEachElement ( edRow.childNodes, function(cellElem) {
+			if ( cellElem.nodeType == Node.ELEMENT_NODE ) {
+				cellElem.pageX = lastPageX
+				lastPageX += getElemDimPx ( cellElem, "width" )
+			}
+		} )
+	}
+
 	try {
-		var edNum = e.options[e.selectedIndex].value
+		var edNum = getBaseEditionNum()
 		var edId  = "edition" + edNum
 		var pubId = "publicationInfoEdition" + edNum
 
@@ -357,14 +397,21 @@ function baseEdition(e)  // e is a <select> element.
 		switchClass (edId,  /\bhidden\b/, "shown")
 		switchClass (pubId, /\bhidden\b/, "shown")
 
-		// var w = document.defaultView.getComputedStyle(e,null).width
-		// document.getElementById("textScrollView").style.width = w
-
-		gPageOffset = kPageOffsets[edNum]
-		gPageWidthPx = kPageWidths[edNum]
-
 		this.lastEdId  = edId
 		this.lastPubId = pubId
+
+		calcPagePositions (edId)
+
+		// Fill the "pageNum" text box with a valid page number
+		// and scroll to that page.
+
+		var pageNumBox = document.getElementById ("pageNum")
+
+		// STUB CODE -- we must come up with a smarter way to choose
+		//              which page to transition to.
+		pageNumBox.value = kFirstPages[edNum];
+
+		scrollToPage()
 	}
 	catch (e) {
 		alert ("Problem switching base editions; sorry!\n" + e)
@@ -385,7 +432,7 @@ function initGUI()
 {
 	try {
 		// Process state of "base text" select box.
-		baseEdition ( document.getElementById ("selectBaseEdition") )
+		resetBaseEdition()
 
 		// Find out real number of editions.
 		for ( gNumEditions = 0; getEdCheckbox(gNumEditions); ++gNumEditions ) ;
@@ -410,8 +457,28 @@ function initGUI()
 
 function scrollPage(dir)
 {
-	var e = document.getElementById ("textScrollView")
-	e.scrollLeft += dir * gPageWidthPx  // Not spec, see developer.mozilla.org.
+	var pageNumBox = document.getElementById ("pageNum")
+	var pageNum    = +pageNumBox.value + dir
+	var e          = getBaseEditionNum()
+
+	if ( pageNum >= kFirstPages[e] && pageNum <= kLastPages[e] ) {
+		pageNumBox.value = pageNum
+		scrollToPage()
+	}
+}
+
+function scrollToEnd()
+{
+	document.getElementById("pageNum").value =
+		kLastPages [ getBaseEditionNum() ]
+	scrollToPage()
+}
+
+function scrollToBeginning()
+{
+	document.getElementById("pageNum").value =
+		kFirstPages [ getBaseEditionNum() ]
+	scrollToPage()
 }
 
 // Entering a specific page number should bring that page into full view.
@@ -420,7 +487,42 @@ function scrollPage(dir)
 
 function scrollToPage()
 {
-	var p = document.getElementById ("pageNum").value
-	var e = document.getElementById ("textScrollView")
-	e.scrollLeft = (p-gPageOffset) * gPageWidthPx  // Not spec, see above.
+	try {
+		var pageNum    = document.getElementById ("pageNum").value
+		var scrollView = document.getElementById ("textScrollView")
+		var edNum      = getBaseEditionNum()
+
+		if (!(pageNum >= kFirstPages[edNum] && pageNum <= kLastPages[edNum] ) )
+			return scrollToBeginning()
+
+		var pageID = "e" + edNum + "p" + pageNum
+
+		var bp = document.getElementById (pageID)  // class bookPage
+		if ( !bp ) return
+
+		var gc = bp.parentNode
+
+		// We could do gc.scrollIntoView() here, but that is not W3C.
+		// IE and Firefox and Safari all implement it differently;
+		// Safari doesn't do exactly what we want.
+
+		// Let's try to do better...
+
+		if ( gc.nodeType != Node.ELEMENT_NODE ) {
+			debug ("bookPage's parent node is not an element")
+			return
+		}
+		if ( gc.className != "gridCell" ) {
+			debug ("bookPage's parent element is not a gridCell")
+			return
+		}
+
+		// scrollLeft is not W3C; is it implemented consistently?
+		scrollView.scrollLeft = gc.pageX
+	}
+	catch (e) {
+		alert ("Problem in scrollToPage(): " + e)
+		e.alerted = true
+		throw e
+	}
 }

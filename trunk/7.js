@@ -73,6 +73,13 @@ function getBaseEditionNum()
 	return e.options[e.selectedIndex].value
 }
 
+function isValidPageNum (pageNum, edNum)
+{
+	// Note that, if pageNum is not a number, this returns false.
+	return pageNum >= kFirstPages[edNum] &&
+		   pageNum <= kLastPages [edNum]
+}
+
 function countCheckedEditions()
 {
 	var count = 0
@@ -461,7 +468,7 @@ function scrollPage(dir)
 	var pageNum    = +pageNumBox.value + dir
 	var e          = getBaseEditionNum()
 
-	if ( pageNum >= kFirstPages[e] && pageNum <= kLastPages[e] ) {
+	if ( isValidPageNum (pageNum, e) ) {
 		pageNumBox.value = pageNum
 		scrollToPage()
 	}
@@ -492,7 +499,7 @@ function scrollToPage()
 		var scrollView = document.getElementById ("textScrollView")
 		var edNum      = getBaseEditionNum()
 
-		if (!(pageNum >= kFirstPages[edNum] && pageNum <= kLastPages[edNum] ) )
+		if ( !isValidPageNum (pageNum, edNum) )
 			return scrollToBeginning()
 
 		var pageID = "e" + edNum + "p" + pageNum

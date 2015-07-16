@@ -30,6 +30,6 @@ displaying many texts that are electronically encoded in formats such as
 
 # Contribution #
 
-We welcome your comments and ideasand in the [issue tracker](issues/).
+We welcome your comments and ideas in the issue tracker.
 
 We welcome your [pull requests](https://help.github.com/articles/using-pull-requests/).
